@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String[] drinks = {"Эспрессо", "Капучино", "Латте"};
+        int basePrice = 650; //Базовая цена для маленького размера
+
+        System.out.println("Добро пожаловать в Кофейню!");
+
+        System.out.println("\nМеню напитков:");
+        for (int i = 0; i < drinks.length; i++) {
+            System.out.println((i + 1) + ". " + drinks[i]);
+        }
+
+        System.out.print("\nВыберите напиток (1-3): ");
+        int drinkChoice = scanner.nextInt() - 1;
+
+        if (drinkChoice < 0 || drinkChoice >= drinks.length) {
+            System.out.println("Некорректный выбор напитка.");
+            scanner.close();
+            return;
+        }
+
+        String[] sizes = {"Маленький", "Средний", "Большой"};
+        int[] sizePrices = {0, 150, 350}; 
+
+        System.out.println("\nВыберите размер напитка:");
+        for (int i = 0; i < sizes.length; i++) {
+            int price = basePrice + sizePrices[i];
+            System.out.println((i + 1) + ". " + sizes[i] + " - " + price + " тнг");
+        }
+
+        System.out.print("\nВведите номер размера (1-3): ");
+        int sizeChoice = scanner.nextInt() - 1;
+
+        if (sizeChoice < 0 || sizeChoice >= sizes.length) {
+            System.out.println("Некорректный выбор размера.");
+            scanner.close();
+            return;
+        }
+
+        int total = basePrice + sizePrices[sizeChoice];
+
+        System.out.println("\nИтоговая сумма: " + total + " тнг");
+
+        System.out.print("Выберите способ оплаты (1 - Наличные, 2 - Карта): ");
+        int paymentMethod = scanner.nextInt();
+
+        if (paymentMethod == 1 || paymentMethod == 2) {
+            System.out.println("\nОплата прошла успешно!");
+            System.out.println("Ваш заказ: " + drinks[drinkChoice] + " (" + sizes[sizeChoice] + ")");
+            System.out.println("Спасибо за покупку!");
+        } else {
+            System.out.println("\nОшибка оплаты. Заказ отменён.");
+        }
+
+        scanner.close();
+    }
+}
+
